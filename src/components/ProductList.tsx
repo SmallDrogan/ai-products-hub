@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { Product } from '../data/types';
 
+const basePath = '/ai-products-hub';
+
 interface Props {
   products: Product[];
   tags: string[];
@@ -156,7 +158,7 @@ export default function ProductList({ products: initialProducts, tags }: Props) 
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredProducts.map(product => (
-          <a key={product.id} href={`/product/${product.slug}`} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-200 hover:shadow-md hover:border-primary-300 dark:hover:border-primary-600 group block">
+          <a key={product.id} href={`${basePath}/product/${product.slug}`} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-200 hover:shadow-md hover:border-primary-300 dark:hover:border-primary-600 group block">
             <div className="p-6">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-105 transition-transform">

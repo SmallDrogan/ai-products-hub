@@ -2,36 +2,37 @@
 import { categories } from '../data/types';
 
 const currentPath = Astro.url.pathname;
+const basePath = '/ai-products-hub';
 ---
 
 <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <a href="/" class="flex items-center gap-2">
+      <a href={basePath + '/'} class="flex items-center gap-2">
         <span class="text-2xl">🤖</span>
         <span class="text-xl font-bold text-gradient">AI产品导航</span>
       </a>
       
       <nav class="hidden md:flex items-center gap-6">
-        <a href="/" class={`text-sm font-medium transition-colors ${currentPath === '/' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'}`}>
+        <a href={basePath + '/'} class={`text-sm font-medium transition-colors ${currentPath === '/' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'}`}>
           首页
         </a>
-        <a href="/category/agent" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <a href={`${basePath}/category/agent`} class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
           AI Agent
         </a>
-        <a href="/category/writing" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <a href={`${basePath}/category/writing`} class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
           写作
         </a>
-        <a href="/category/image" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <a href={`${basePath}/category/image`} class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
           图像
         </a>
-        <a href="/category/code" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <a href={`${basePath}/category/code`} class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
           代码
         </a>
-        <a href="/category/video" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <a href={`${basePath}/category/video`} class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
           视频
         </a>
-        <a href="/#featured" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <a href={`${basePath}/#featured`} class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
           精选
         </a>
       </nav>

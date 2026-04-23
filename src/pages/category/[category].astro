@@ -14,6 +14,7 @@ export function getStaticPaths() {
 const { category } = Astro.params;
 const categoryData = getCategoryById(category as string);
 const categoryProducts = getProductsByCategory(category as string);
+const basePath = '/ai-products-hub';
 ---
 
 <MainLayout title={categoryData?.name || '分类'} description={categoryData?.description}>
@@ -44,7 +45,7 @@ const categoryProducts = getProductsByCategory(category as string);
     {!categoryData && (
       <div class="text-center py-12">
         <p class="text-gray-500 dark:text-gray-400">分类不存在</p>
-        <a href="/" class="btn-primary mt-4">返回首页</a>
+        <a href={basePath + '/'} class="btn-primary mt-4">返回首页</a>
       </div>
     )}
   </div>

@@ -8,9 +8,10 @@ interface Props {
 
 const { product } = Astro.props;
 const category = getCategoryById(product.category);
+const basePath = '/ai-products-hub';
 ---
 
-<a href={`/product/${product.slug}`} class="card group block">
+<a href={`${basePath}/product/${product.slug}`} class="card group block">
   <div class="p-6">
     <div class="flex items-start gap-4">
       <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-105 transition-transform">
