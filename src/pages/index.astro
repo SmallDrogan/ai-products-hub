@@ -1,0 +1,64 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { products, getFeaturedProducts, getAllTags } from '../data/products';
+import { categories } from '../data/types';
+import ProductGrid from '../components/ProductGrid.astro';
+import CategoryNav from '../components/CategoryNav.astro';
+import ProductList from '../components/ProductList';
+
+const featuredProducts = getFeaturedProducts();
+const allTags = getAllTags();
+---
+
+<MainLayout title="首页">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section class="mb-12">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          发现最好的 <span class="text-gradient">AI 产品</span>
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          AI产品导航收录最新、最实用的AI工具，帮助您找到适合的AI助手
+        </p>
+      </div>
+      
+      <ProductList 
+        client:load 
+        products={products} 
+        tags={allTags}
+      />
+    </section>
+    
+    <section class="mb-12" id="categories">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+        分类浏览
+      </h2>
+      <CategoryNav />
+    </section>
+    
+    <section class="mb-12" id="featured">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+        精选推荐
+      </h2>
+      <ProductGrid products={featuredProducts} />
+    </section>
+    
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+        全部产品 ({products.length})
+      </h2>
+      <ProductGrid products={products} />
+    </section>
+    
+    <section class="bg-gradient-to-br from-primary-50 to-purple-50 dark:from-gray-800 dark:to-gray-800 rounded-2xl p-8 mb-12">
+      <div class="text-center">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          持续更新中
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400">
+          我们持续收录优质AI产品，帮助您发现最适合的工具
+        </p>
+      </div>
+    </section>
+  </div>
+</MainLayout>

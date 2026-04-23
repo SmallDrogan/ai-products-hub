@@ -1,0 +1,51 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { products, getProductsByCategory } from '../../data/products';
+import { categories, getCategoryById } from '../../data/types';
+import ProductGrid from '../../components/ProductGrid.astro';
+import CategoryNav from '../../components/CategoryNav.astro';
+
+export function getStaticPaths() {
+  return categories.map(category => ({
+    params: { category: category.id },
+  }));
+}
+
+const { category } = Astro.params;
+const categoryData = getCategoryById(category as string);
+const categoryProducts = getProductsByCategory(category as string);
+---
+
+<MainLayout title={categoryData?.name || '分类'} description={categoryData?.description}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section class="mb-8">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="text-4xl">{categoryData?.icon}</span>
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            {categoryData?.name}
+          </h1>
+          <p class="text-gray-600 dark:text-gray-400">
+            {categoryData?.description}
+          </p>
+        </div>
+      </div>
+      
+      <CategoryNav currentCategory={category} />
+    </section>
+    
+    <section>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+        共 {categoryProducts.length} 个产品
+      </p>
+      <ProductGrid products={categoryProducts} />
+    </section>
+    
+    {!categoryData && (
+      <div class="text-center py-12">
+        <p class="text-gray-500 dark:text-gray-400">分类不存在</p>
+        <a href="/" class="btn-primary mt-4">返回首页</a>
+      </div>
+    )}
+  </div>
+</MainLayout>

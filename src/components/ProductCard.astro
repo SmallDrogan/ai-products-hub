@@ -1,0 +1,55 @@
+---
+import type { Product } from '../data/types';
+import { getCategoryById } from '../data/types';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const category = getCategoryById(product.category);
+---
+
+<a href={`/product/${product.slug}`} class="card group block">
+  <div class="p-6">
+    <div class="flex items-start gap-4">
+      <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-105 transition-transform">
+        {category?.icon || '📦'}
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 truncate">
+            {product.name}
+          </h3>
+          {product.featured && (
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300">
+              精选
+            </span>
+          )}
+        </div>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+          {product.description}
+        </p>
+      </div>
+    </div>
+    
+    <div class="mt-4 flex flex-wrap gap-2">
+      {product.tags.slice(0, 3).map(tag => (
+        <span class="tag">{tag}</span>
+      ))}
+    </div>
+    
+    <div class="mt-4 flex items-center justify-between">
+      <span class="text-xs text-gray-500 dark:text-gray-400">
+        {category?.name || '其他'}
+      </span>
+      <span class={`text-xs font-medium px-2 py-1 rounded ${
+        product.pricing === 'free' ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300' :
+        product.pricing === 'freemium' ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300' :
+        'bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300'
+      }`}>
+        {product.pricing === 'free' ? '免费' : product.pricing === 'freemium' ? '免费增值' : '付费'}
+      </span>
+    </div>
+  </div>
+</a>
